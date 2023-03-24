@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+<title>SingleImgView Page</title>
+{% endblock title %}
+
+{% block css %}
+{% endblock css %}
+
+{% block js %}
+{% endblock js %}
+
+{% block body %}
+
+
+<!-- heading  -->
+
+<div class="container my-5 p-2 text-center text-dark bg-info shadow rounded-3">
+    <h1 class="display-6 ">Single ImgView Page</h1>
+</div>
+
+<div class="container my-4 shadow py-5">
+    
+    <center>
+        <h1 class="display-5">{{image.title}}</h1>
+        <img src="{{image.image.url}}" alt="No image" height="250px" class="my-3" >
+       <p class="display-6 text-red"> Description:{{image.desc}}</p>
+       <p class="display-6">Uploaded By:{{image.uploaded_by}}</p>
+       <p class="display-6">Uploaded At:{{image.uploaded_at}}
+        <p class="display-6">Category of Image:{{image.cat}}
+<div>
+    <a href="{% url 'addimage' %}" class="btn btn-info display-3">Upload Next Img</a>
+
+</div>
+    </center>
+    </div>
+       
+      
+       
+
+
+{% endblock body %}

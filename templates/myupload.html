@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+<title>MyUpload Page</title>
+{% endblock title %}
+
+{% block css %}
+{% endblock css %}
+
+{% block js %}
+{% endblock js %}
+
+{% block body %}
+
+
+<!-- heading  -->
+
+<div class="container my-5 p-2 text-center text-light bg-info shadow rounded-3">
+    <h1 class="display-6">My Uploaded Images</h1>
+</div>
+
+<div class="container my-5">
+   <table class="table">
+
+    {% for img in Images %}
+    <tr class="shadow">
+        <td>
+            <img src="{{img.image.url}}" alt="No image" height="150px">
+        </td>
+        <td><h3>{{img.title}}</h3></td>
+        <td><p class="lead">{{img.desc}}</p></td>
+        <td><p class="lead">{{img.uploaded_by}}</p></td>
+        <td><p class="lead">{{img.uploaded_at}}</p></td>
+        <td><p class="lead">{{img.cat}}</p></td>
+
+    </tr>
+    {% empty %}
+    <h1 class="display-5">No Uploads</h1>
+
+
+
+    {% endfor%}
+
+
+   </table>
+</div>
+
+{% endblock body %}
