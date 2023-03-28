@@ -21,7 +21,7 @@ def signout_view(request):
 
 
 class home_view(View):
-
+    
     def get(self , request):
 
         if request.user.is_authenticated:
@@ -104,6 +104,8 @@ class addimage_view(View):
     def get(self , request):
         forms = ImageForm()
         context = {'forms':forms}
+        if not request.user.is_authenticated:
+            return redirect('home')
 
         
         return render(request , 'addimage.html',context)
@@ -115,12 +117,22 @@ class addimage_view(View):
         # finaleimg = img.read()
         # print(type(finaleimg))
         forms = ImageForm(request.POST , request.FILES)
+
+        top1 = '1. Species: %s, Status: %s, Probability: %.4f'%('Tomato','late blight',0.7)
+        top2 = '2. Species: %s, Status: %s, Probability: %.4f'%('apple','healthy',0.1)
+        top3 = '3. Species: %s, Status: %s, Probability: %.4f'%('chikoo','healthy',00.5)
+
+        predictions = [ { 'pred':top1 }, { 'pred':top2 }, { 'pred':top3 } ]
+        print(predictions)
+
         if forms.is_valid():
             task = forms.save(commit=False)
             task.uploaded_by = request.user
             task.save()
             messages.success(request , 'Image is Added Successfully..')
             return redirect('gallery')
+        if not request.user.is_authenticated:
+            return redirect('home')
         return render(request , 'addimage.html')
             
 
